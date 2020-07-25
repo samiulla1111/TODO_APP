@@ -1,0 +1,102 @@
+<html>
+    <head>
+        <title>
+            Todo List
+        </title>
+         <!-- importing bootstrap -->
+         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+         <!-- supporting all devices -->
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://kit.fontawesome.com/b613d514fc.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/css/home.css">
+
+    </head>
+
+    <body>
+        <div >
+            <!-- this is background divs -->
+            <div id="stars"></div>
+            <div id="stars2"></div>
+            <div id="stars3"></div>
+            <!-- this is a container -->
+            <div class="container-fluid col-md-6 felx-col">
+                <!-- this is name of the application -->
+                <div class="d-flex justify-content-center">
+                    <h1 class="center"> <span>TODO App</span></h1>
+                </div>
+                <!-- this form contains textarea,date,dropdown list.. -->
+                <form class="flex-col" method="post" action="/create_todo">
+                    <div class="form-row">
+                        <!-- this is text area label -->
+                        <div class="col-md-12 mb-3">
+                        <label for="validationDefault01"><h5 class="des-white">Description</h5></label>
+                        <textarea type="text" name="description" class="form-control" id="validationDefault01" placeholder="What do you want to do?" required rows='1' placeholder='Auto-Expanding Textarea'></textarea>
+                        </div>
+                    
+                        <!-- this is drop down list label -->
+                        <div class="form-group col-md-6 mb-3">
+                            <label for="exampleFormControlSelect1"><h5 class="des-white">Category</h5></label>
+                            <select name="category" class="form-control" id="exampleFormControlSelect1" required>
+                                <option selected disabled value="">Choose a Category</option>
+                                <option>Personal</option>
+                                <option>Professional</option>
+                                <option>School</option>
+                                <option>College</option>
+                            </select>
+                          </div>
+                          <!-- this is date lable -->
+    
+                        <div class="col-md-6 mb-3">
+                            <label for="validationDefault01"><h5 class="des-white">Due Date</h5></label>
+                            <input name="date" type="date" class="form-control" id="validationDefault01" value="Mark" required>
+                        </div>
+    
+                    </div>
+                <!-- this is submit button -->
+                    <button class="flex-row addButton col-md-12 mb-3 mt-1 btn btn-dark " type="submit">
+                        <i class="fas fa-plus"></i>
+                        <h4 style="display: inline;">ADD TASK</h4>
+                    </button>
+    
+                </form>
+                <!-- Here the out put will be shown -->
+                <% for(let i of todo_list){%>
+                    <div class="card wiggle text-white mb-3">
+                        <!-- this container contains category and delete button -->
+                        <div class="flex-row flex-row-add card-header bg-color border-success">
+                            <h5 style="display: inline;">
+                                <span class="bg-color bg-black">Category : </span> 
+                                <span class="bg-color bg-black"><%= i.category%></span>
+                            </h5>
+                            <a href="/delete-details/?id=<%= i._id %>"> 
+                                <button class="btn btn-delete icon bg-button">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </a>
+                        </div>
+                        <!-- this container contains discription -->
+                        <div class="card-body bg-back ">
+                            <h5 style="display: inline;" class="card-title bg-black">
+                                <span>Description : </span> 
+                                <span><%= i.description%></span>
+                            </h5>
+                            <!-- and finally at the end of the container -->
+                          <p class="flex-row card-text mt-2 bg-black">
+                                <span>=========</span> 
+                                <span class="ml-3 bg-black">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <%= i.date%>
+                                </span>
+                                <span> =========<span>
+                            </p>
+                        </div>
+                    </div>
+
+                <%}%>
+               
+            </div>
+     
+        <script type="text/javascript" src="/js/home.js"></script>
+
+    </body>
+</html>
